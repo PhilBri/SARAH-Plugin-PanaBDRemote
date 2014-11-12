@@ -21,16 +21,27 @@ exports.action = function ( data , callback , config , SARAH ) {
 
 
     var request = require('request');
-    var MyRemoteChain = 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100';
+
+    var str1 = 'cCMD_RC_' +cmd + '.x';
+    var str2 = 'cCMD_RC_' +cmd + '.y';
+    
+    var myForm = {};
+    myForm [str1]=100;
+    myForm [str2]=100;
+
+    var qs = require ('querystring');
+    var req = qs.stringify(myForm);
 
     request ({
         uri     :   'http://' + blurayIP + ':80/WAN/dvdr/dvd_ctrl.cgi',
-        method  :   'POST',
+        method  :   'post',
         headers : {
                     'user-agent' : 'MEI-LAN-REMOTE-CALL',
-                    'content-lenght' : MyRemoteChain.length
+                    'Content-lenght' : req.length,
+                    'Content-type': 'application/x-www-form-urlencoded',
+                    'Connection': 'Keep-Alive'
         },
-        body    :   'MyRemoteChain'
+        body    :   myForm
 
     }, function (err, response, body) {
     
