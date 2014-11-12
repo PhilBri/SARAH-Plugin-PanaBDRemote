@@ -1,0 +1,112 @@
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulePanaBDRemote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+    <rule id="rulePanaBDRemote" scope="public">
+        <example>Sarah allume le blou ré</example>
+        <tag>out.action=new Object(); </tag>
+
+        <item>
+            Sarah 
+            <one-of>
+
+                <item>
+                    Allume
+                    <tag>out.action.cmd="POWER";out.action.ttsAction="J'allume le blou ré";</tag>
+                </item>
+
+                <item>
+                    Eteind
+                    <tag>out.action.cmd="POWER";out.action.ttsAction="J'éteind le blou ré";</tag>
+                </item>
+
+                <item>
+                    Ouvre
+                    <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du blou ré";</tag>
+                </item>
+
+                <item>
+                    Ferme
+                    <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du blou ré";</tag>
+                </item>
+
+                <item>
+                    Stoppe
+                    <tag>out.action.cmd="STOP";out.action.ttsAction="La lecture du blou ré est arrétée";</tag>
+                </item>
+
+                <item>
+                    Lis
+                    <tag>out.action.cmd="PLAYBACK";out.action.ttsAction="Le blou ré est en lecture";</tag>
+                </item>
+
+                <item>
+                    Met en pause
+                    <tag>out.action.cmd="PAUSE";out.action.ttsAction="Le blou ré est en pause";</tag>
+                </item>
+
+                <item>
+                    Piste suivante
+                    <tag>out.action.cmd="SKIPFWD";out.action.ttsAction="Piste suivante sélectionnée";</tag>
+                </item>
+
+                <item>
+                    Piste précédante
+                    <tag>out.action.cmd="SKIPPREV";out.action.ttsAction="Piste précedante sélectionnée";</tag>
+                </item>
+
+                <item>
+                    Avance
+                    <tag>out.action.cmd="CUE";out.action.ttsAction="Avance rapide";</tag>
+                </item>
+
+                <item>
+                    Recule
+                    <tag>out.action.cmd="REV";out.action.ttsAction="Retour rapide";</tag>
+                </item>
+
+                <item>
+                    Quel est l'état
+                    <tag>out.action.cmd="STATUS";out.action.ttsAction="L'état du blou ré est affiché";</tag>
+                </item>
+
+                <item>
+                    Affiche le menu principal
+                    <tag>out.action.cmd="TITLE";out.action.ttsAction="Menu principal affiché";</tag>
+                </item>
+
+                <item>
+                    Affiche le sous-menu
+                    <tag>out.action.cmd="MENU";out.action.ttsAction="Entrée dans le sous menu";</tag>
+                </item>
+
+                <item>
+                    Sort du menu
+                    <tag>out.action.cmd="EXIT";out.action.ttsAction="Sortie du menu";</tag>
+                </item>
+
+                <item>
+                    Touche 1
+                    <tag>out.action.cmd="D1";out.action.ttsAction="Touche 1";</tag>
+                </item>
+
+            </one-of>
+
+            <item repeat="0-1">
+
+                <one-of>
+
+                    <item>
+                        du blou ré
+                        <tag>out.action.gender="du ";</tag>
+                    </item>
+
+                    <item>
+                        le blou ré
+                        <tag>out.action.gender="le ";</tag>
+                    </item>
+                </one-of>
+            </item>
+
+        </item>
+
+        <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/PanaBDRemote";</tag>
+    </rule>
+</grammar>
