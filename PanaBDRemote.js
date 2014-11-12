@@ -55,3 +55,4 @@ exports.action = function ( data , callback , config , SARAH ) {
         console.log ('Valeur à retourner' + body + '\r\n');
     });
     callback ({ 'tts': data.ttsAction });
+}
