@@ -11,36 +11,59 @@
 exports.action = function ( data , callback , config , SARAH ) {
     config = config.module.PanaBDRemote;
     var cmd = data.cmd;
-    var blurayIP = '192.168.1.200';//config.BluRayIP;
+    var blurayIP = config.BluRayIP;
 
     if ( !config.BluRayIP ) {
         console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
         callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
         return;
     }
-
+    
     var myStr = 'cCMD_RC_' +cmd + '.x&cCMD_RC_' +cmd + '.y';
 
-    var request = require('request');
+    var http = require('http');
+    var post_options = {
+        host: blurayIP,
+        port: 80,
+        path: '/WAN/dvdr/dvd_ctrl.cgi? HTTP/1.1',
+        method: 'POST',
+        headers: {
+                'User-Agent' : 'MEI-LAN-REMOTE-CALL',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': myStr.length,
+                'Connection': 'Keep-Alive'
+        }
+    };
 
-    var str1 = 'cCMD_RC_' +cmd + '.x';
-    var str2 = 'cCMD_RC_' +cmd + '.y';
-    
-    var myForm = {};
-    myForm [str1]='100';
-    myForm [str2]='100';
+    // Set up the request
+    var post_req = http.request(myStr, function(res) {
+        console.log ( 'STATUS = ' + res.statusCode);
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('Reponse: ' + chunk);
+            callback ({ 'tts': data.ttsAction });
+        });
+    });
 
-    var qs = require ('querystring');
-    var req = qs.stringify(myForm);
+    req.on('error', function (e) {
+        console.log('Problème request = ' + e.message);
+    });
 
+    // post the data
+    post_req.write(myStr+'\r\n');
+    post_req.end();
+
+/*
     request ({
-        uri     :   'http://192.168.1.200:80/WAN/dvdr/dvd_ctrl.cgi',
+        uri     :   'http://' + blurayIP + ':80/WAN/dvdr/dvd_ctrl.cgi',
         method  :   'post',
         headers : {
-                    'Content-Length' : myStr.length,
+                    'user-agent' : 'MEI-LAN-REMOTE-CALL',
+                    'Content-lenght' : req.length,
+                    'Content-type': 'application/x-www-form-urlencoded',
+                    'Connection': 'Keep-Alive'
         },
-        form    :   myStr
-
+        body    :   s
     }, function (err, response, body) {
     
         if (err || response.statusCode != 200) {
@@ -49,7 +72,7 @@ exports.action = function ( data , callback , config , SARAH ) {
             return;
         }
         console.log ('BluRayRemote => ' + cmd + ' = OK !\r\n');
-        //console.log ('Valeur à retourner' + body + '\r\n');
+        console.log ('Valeur à retourner' + body + '\r\n');
     });
-    callback ({ 'tts': data.ttsAction });
+*/
 }
