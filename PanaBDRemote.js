@@ -33,7 +33,7 @@ exports.action = function ( data , callback , config , SARAH ) {
     var req = qs.stringify(myForm);
 
     request ({
-        uri     :   'http://192.168.1.200:80/WAN/dvdr/dvd_ctrl.cgi',
+        url     :   'http://192.168.1.200:80/WAN/dvdr/dvd_ctrl.cgi',
         method  :   'post',
         headers : {
                     'User-Agent' : 'MEI-LAN-REMOTE-CALL',
