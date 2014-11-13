@@ -37,7 +37,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 
     // Set up the request
     var post_req = http.request(myStr, function(res) {
-        console.log ( 'STATUS = ' + res.statusCode);
+        //console.log ( 'STATUS = ' + res.statusCode);
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             console.log('Reponse: ' + chunk);
