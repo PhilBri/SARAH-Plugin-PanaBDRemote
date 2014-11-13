@@ -39,7 +39,7 @@ exports.action = function ( data , callback , config , SARAH ) {
                     'User-Agent' : 'MEI-LAN-REMOTE-CALL',
                     'Content-Length' : req.length,
         },
-        form    :   req
+        form    :   myForm
 
     }, function (err, response, body) {
     
