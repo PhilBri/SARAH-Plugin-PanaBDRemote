@@ -41,7 +41,7 @@ exports.action = function ( data , callback , config , SARAH ) {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Connection': 'Keep-Alive'
         },
-        form    :   myForm
+        post    :   myForm
 
     }, function (err, response, body) {
     
