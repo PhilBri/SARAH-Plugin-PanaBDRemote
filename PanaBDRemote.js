@@ -9,15 +9,15 @@
 */
 
 exports.action = function ( data , callback , config , SARAH ) {
-    config = config.module.PanaBDRemote;
+    //config = config.module.PanaBDRemote;
     var cmd = data.cmd;
-    var blurayIP = config.BluRayIP;
+    var blurayIP = '192.168.0.200';//config.BluRayIP;
 
-    if ( !config.BluRayIP ) {
-        console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
-        callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
-        return;
-    }
+    //if ( !config.BluRayIP ) {
+    //    console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
+    //    callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
+    //    return;
+    //}
 
 
     var request = require('request');
@@ -46,7 +46,6 @@ exports.action = function ( data , callback , config , SARAH ) {
     }, function (err, response, body) {
     
         if (err || response.statusCode != 200) {
-            console.log ('BluRayRemote => uri = ' + request.uri);
             console.log ("BluRayRemote => L'action a échouée " + err);
             callback ({'tts' : "L'action à échouée"});
             return;
