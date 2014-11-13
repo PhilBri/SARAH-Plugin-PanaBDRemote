@@ -11,7 +11,7 @@
 exports.action = function ( data , callback , config , SARAH ) {
     //config = config.module.PanaBDRemote;
     var cmd = data.cmd;
-    var blurayIP = '192.168.0.200';//config.BluRayIP;
+    var blurayIP = '192.168.1.200';//config.BluRayIP;
 
     //if ( !config.BluRayIP ) {
     //    console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
