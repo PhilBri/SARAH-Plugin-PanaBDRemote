@@ -38,10 +38,8 @@ exports.action = function ( data , callback , config , SARAH ) {
         headers : {
                     'User-Agent' : 'MEI-LAN-REMOTE-CALL',
                     'Content-Length' : req.length,
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Connection': 'Keep-Alive'
         },
-        post    :   myForm
+        form    :   req
 
     }, function (err, response, body) {
     
