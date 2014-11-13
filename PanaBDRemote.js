@@ -19,7 +19,7 @@ exports.action = function ( data , callback , config , SARAH ) {
         return;
     }
     
-    var myStr = 'cCMD_RC_' +cmd + '.x&cCMD_RC_' +cmd + '.y';
+    var myStr = 'cCMD_RC_' +cmd + '.x=100&cCMD_RC_' +cmd + '.y=100';
 
     var http = require('http');
     var post_options = {
