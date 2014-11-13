@@ -26,22 +26,22 @@ exports.action = function ( data , callback , config , SARAH ) {
     var str2 = 'cCMD_RC_' +cmd + '.y';
     
     var myForm = {};
-    myForm [str1]=100;
-    myForm [str2]=100;
+    myForm [str1]='100';
+    myForm [str2]='100';
 
     var qs = require ('querystring');
     var req = qs.stringify(myForm);
 
     request ({
-        uri     :   'http://' + blurayIP + ':80/WAN/dvdr/dvd_ctrl.cgi',
+        uri     :   'http://192.168.1.200/WAN/dvdr/dvd_ctrl.cgi',
         method  :   'post',
         headers : {
-                    'user-agent' : 'MEI-LAN-REMOTE-CALL',
-                    'Content-lenght' : req.length,
-                    'Content-type': 'application/x-www-form-urlencoded',
+                    'User-Agent' : 'MEI-LAN-REMOTE-CALL',
+                    'Content-Lenght' : req.length,
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'Connection': 'Keep-Alive'
         },
-        body    :   req
+        body    :   require('querystring').stringify(myForm)
 
     }, function (err, response, body) {
     
@@ -51,7 +51,7 @@ exports.action = function ( data , callback , config , SARAH ) {
             return;
         }
         console.log ('BluRayRemote => ' + cmd + ' = OK !\r\n');
-        console.log ('Valeur à retourner' + body + '\r\n');
+        //console.log ('Valeur à retourner' + body + '\r\n');
     });
     callback ({ 'tts': data.ttsAction });
 }
