@@ -25,7 +25,7 @@ exports.action = function ( data , callback , config , SARAH ) {
     var post_options = {
         host: blurayIP,
         port: 80,
-        path: '/WAN/dvdr/dvd_ctrl.cgi? HTTP/1.1',
+        path: '/WAN/dvdr/dvd_ctrl.cgi? HTTP/1.1 HTTP/1.1',
         method: 'POST',
         headers: {
                 'User-Agent' : 'MEI-LAN-REMOTE-CALL',
@@ -36,7 +36,7 @@ exports.action = function ( data , callback , config , SARAH ) {
     };
 
     // Set up the request
-    var post_req = http.request(myStr, function(res) {
+    var post_req = http.request(post_options, function(res) {
         //console.log ( 'STATUS = ' + res.statusCode);
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
