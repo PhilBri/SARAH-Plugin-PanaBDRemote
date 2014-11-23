@@ -9,70 +9,34 @@
 */
 
 exports.action = function ( data , callback , config , SARAH ) {
-    config = config.module.PanaBDRemote;
+    var cfg = config.module.PanaBDRemote;
     var cmd = data.cmd;
-    var blurayIP = config.BluRayIP;
 
-    if ( !config.BluRayIP ) {
+    if ( !cfg.BluRayIP ) {
         console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
-        callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
-        return;
+        return callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
     }
     
-    var myStr = 'cCMD_RC_' +cmd + '.x=100&cCMD_RC_' +cmd + '.y=100';
+    var myForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
+    var myLen   = ( require ( 'querystring' ).stringify ( myForm ).length );
+    var request = require ( 'request' );
 
-    var http = require('http');
-    var post_options = {
-        host: blurayIP,
-        port: 80,
-        path: '/WAN/dvdr/dvd_ctrl.cgi? HTTP/1.1 HTTP/1.1',
-        method: 'POST',
-        headers: {
-                'User-Agent' : 'MEI-LAN-REMOTE-CALL',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Content-Length': myStr.length,
-                'Connection': 'Keep-Alive'
-        }
-    };
-
-    // Set up the request
-    var post_req = http.request(post_options, function(res) {
-        //console.log ( 'STATUS = ' + res.statusCode);
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            console.log('Reponse: ' + chunk);
-            callback ({ 'tts': data.ttsAction });
-        });
-    });
-
-    req.on('error', function (e) {
-        console.log('Problème request = ' + e.message);
-    });
-
-    // post the data
-    post_req.write(myStr+'\r\n');
-    post_req.end();
-
-/*
-    request ({
-        uri     :   'http://' + blurayIP + ':80/WAN/dvdr/dvd_ctrl.cgi',
-        method  :   'post',
-        headers : {
-                    'user-agent' : 'MEI-LAN-REMOTE-CALL',
-                    'Content-lenght' : req.length,
-                    'Content-type': 'application/x-www-form-urlencoded',
-                    'Connection': 'Keep-Alive'
-        },
-        body    :   s
-    }, function (err, response, body) {
+    request.post({
+        url     :'http://' + cfg.BluRayIP + '/WAN/dvdr/dvd_ctrl.cgi', 
+        headers : { 'Content-Length' : myLen,
+                    'Connection': 'Keep-Alive',
+                    'User-Agent': 'MEI-LAN-REMOTE-CALL'},
+        form    : myForm
     
-        if (err || response.statusCode != 200) {
-            console.log ("BluRayRemote => L'action a échouée " + err);
-            callback ({'tts' : "L'action à échouée"});
-            return;
+    }, function ( err, httpResponse, body ) {
+        if ( err || httpResponse.statusCode != 200 ) {
+            console.log ( "Action échouée => "  +err );
+            return callback ({ 'tts' : "L'action à échouée !" });
         }
-        console.log ('BluRayRemote => ' + cmd + ' = OK !\r\n');
-        console.log ('Valeur à retourner' + body + '\r\n');
+        console.log ( 'BluRayRemote => ' + cmd + ' = OK !\r\n'  );
+        console.log ( 'Valeur à retourner' + body + '\r\n' );
     });
-*/
+    
+    callback ({ 'tts' : data.ttsAction });
+
 }
