@@ -20,23 +20,25 @@ exports.action = function ( data , callback , config , SARAH ) {
     var aForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
     var myForm = JSON.stringify ( aForm );
     var myLen   = myForm.length;
-    
+
     var request = require ( 'request' );
 
-    request.post({
-        url     :'http://192.168.1.200/WAN/dvdr/dvd_ctrl.cgi', 
-        headers : { 'Content-Length' : myLen,
-                    'Connection': 'Keep-Alive',
-                    'User-Agent': 'MEI-LAN-REMOTE-CALL'},
+    request.post ({
+        url     : 'http://192.168.1.200/WAN/dvdr/dvd_ctrl.cgi', 
+        headers : { 'Content-Length': myLen,
+                    'Connection'    : 'Keep-Alive',
+                    'User-Agent'    : 'MEI-LAN-REMOTE-CALL'},
         form    : myForm
-    
+
     }, function ( err, httpResponse, body ) {
+        
         if ( err || httpResponse.statusCode != 200 ) {
             console.log ( "Action échouée => "  +err );
-            console.log ("satuscode = " + httpResponse.statusCode);
+            console.log ( "StatusCode = " + httpResponse.statusCode );
             return callback ({ 'tts' : "L'action à échouée !" });
         }
-        console.log ( 'BluRayRemote => ' + cmd + ' = OK !\r\n'  );
+        
+        console.log ( 'BluRayRemote => ' + cmd + ' = OK !\r\n' );
         console.log ( 'Valeur à retourner' + body + '\r\n' );
     });
     
