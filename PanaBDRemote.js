@@ -9,20 +9,20 @@
 */
 
 exports.action = function ( data , callback , config , SARAH ) {
-    var cfg = config.module.PanaBDRemote;
+    //var cfg = config.module.PanaBDRemote;
     var cmd = data.cmd;
-
+/*
     if ( !cfg.BluRayIP ) {
         console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
         return callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
     }
-    
+*/   
     var myForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
     var myLen   = ( require ( 'querystring' ).stringify ( myForm ).length );
     var request = require ( 'request' );
 
     request.post({
-        url     :'http://' + cfg.BluRayIP + '/WAN/dvdr/dvd_ctrl.cgi', 
+        url     :'http://192.168.1.200/WAN/dvdr/dvd_ctrl.cgi', 
         headers : { 'Content-Length' : myLen,
                     'Connection': 'Keep-Alive',
                     'User-Agent': 'MEI-LAN-REMOTE-CALL'},
