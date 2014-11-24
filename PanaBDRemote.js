@@ -17,8 +17,10 @@ exports.action = function ( data , callback , config , SARAH ) {
         return callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
     }
 */   
-    var myForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
-    var myLen   = ( require ( 'querystring' ).stringify ( myForm ).length );
+    var aForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
+    var myForm = JSON.stringify ( aForm );
+    var myLen   = myForm.length;
+    
     var request = require ( 'request' );
 
     request.post({
@@ -31,6 +33,7 @@ exports.action = function ( data , callback , config , SARAH ) {
     }, function ( err, httpResponse, body ) {
         if ( err || httpResponse.statusCode != 200 ) {
             console.log ( "Action échouée => "  +err );
+            console.log ("satuscode = " + httpResponse.statusCode);
             return callback ({ 'tts' : "L'action à échouée !" });
         }
         console.log ( 'BluRayRemote => ' + cmd + ' = OK !\r\n'  );
