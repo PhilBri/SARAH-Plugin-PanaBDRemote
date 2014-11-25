@@ -22,13 +22,13 @@ exports.action = function ( data , callback , config , SARAH ) {
     var myLen   = myForm.length;
 
     var request = require ( 'request' );
-
+    // use body; or form: ?
     request.post ({
         url     : 'http://192.168.1.200/WAN/dvdr/dvd_ctrl.cgi', 
         headers : { 'Content-Length': myLen,
                     'Connection'    : 'Keep-Alive',
                     'User-Agent'    : 'MEI-LAN-REMOTE-CALL'},
-        form    : myForm
+        body    : myForm
 
     }, function ( err, httpResponse, body ) {
         
