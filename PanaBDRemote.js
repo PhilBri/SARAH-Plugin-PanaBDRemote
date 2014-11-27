@@ -17,20 +17,20 @@ exports.action = function ( data , callback , config , SARAH ) {
         return callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
     }
 */   
-    //var aForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
+    var myForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
     //var myForm = JSON.stringify ( aForm );
     //var myLen   = myForm.length;
-    var myForm = 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100';
-    var myLen = myForm.length;
+    var myLen = (require('querystring').stringify(myForm).length);
 
     var request = require ( 'request' );
     // use body; or form: ?
     request.get ({
-        uri     : 'http://192.168.1.200/WAN/dvdr/dvd_ctrl.cgi', 
+        uri     : 'http://192.168.1.200:80/WAN/dvdr/dvd_ctrl.cgi', 
         headers : { 'Content-Length': myLen,
-                    'Connection'    : 'Keep-Alive',
-                    'User-Agent'    : 'MEI-LAN-REMOTE-CALL'},
-        body    : myForm
+                    //'Connection'    : 'Keep-Alive',
+                    //'User-Agent'    : 'MEI-LAN-REMOTE-CALL'
+                },
+        form    : myForm
 
     }, function ( err, httpResponse, body ) {
         
