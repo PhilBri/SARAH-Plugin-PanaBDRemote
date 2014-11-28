@@ -18,17 +18,18 @@ exports.action = function ( data , callback , config , SARAH ) {
     }
 */   
     var myForm  = ( require ( 'querystring' ).parse( 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100' ));
-    //var myForm = JSON.stringify ( aForm );
+    //var myForm = 'cCMD_RC_'+ cmd +'.x=100&cCMD_RC_'+ cmd + '.y=100';
     //var myLen   = myForm.length;
     var myLen = (require('querystring').stringify(myForm).length);
 
     var request = require ( 'request' );
     // use body; or form: ?
-    request.get ({
-        uri     : 'http://192.168.1.200:80/WAN/dvdr/dvd_ctrl.cgi', 
+    request.post ({
+        uri     : 'http://192.168.1.200/WAN/dvdr/dvdr_ctrl.cgi', 
         headers : { 'Content-Length': myLen,
-                    //'Connection'    : 'Keep-Alive',
-                    //'User-Agent'    : 'MEI-LAN-REMOTE-CALL'
+                    'Connection'    : 'Keep-Alive',
+                    'User-Agent'    : 'MEI-LAN-REMOTE-CALL',
+                    'content-type'  : 'application/x-www-form-urlencoded'
                 },
         form    : myForm
 
