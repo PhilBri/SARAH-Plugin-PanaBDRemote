@@ -1,5 +1,5 @@
 /*__________________________________________________
-|              PanaBDRemote v0.1                    |
+|              PanaBDRemote v0.9                    |
 |                                                   |
 | Authors : Phil Bri & Emmanuel Crespin ( 10/2014 ) |
 |    (See http://encausse.wordpress.com/s-a-r-a-h/) |
@@ -24,12 +24,12 @@ exports.action = function ( data , callback , config , SARAH ) {
 
     request.post ({
 
-        uri     :   'http://192.168.1.200/WAN/dvdr/dvdr_ctrl.cgi', 
+        uri     :   'http://' + BluRayIP + '/WAN/dvdr/dvdr_ctrl.cgi', 
         headers :   { 
                     'Content-Length': myLen,
                     'Connection'    : 'Keep-Alive',
                     'User-Agent'    : 'MEI-LAN-REMOTE-CALL',
-                    'content-type'  : 'application/x-www-form-urlencoded'
+                    'Content-Type'  : 'application/x-www-form-urlencoded'
                     },
         form    :   myForm
 
