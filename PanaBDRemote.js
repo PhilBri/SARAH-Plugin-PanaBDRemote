@@ -12,7 +12,7 @@ exports.action = function ( data , callback , config , SARAH ) {
     var cfg = config.module.PanaBDRemote;
     var cmd = data.cmd;
 
-    if ( ! cfg.BluRayIP ) {
+    if ( !cfg.BluRayIP ) {
         console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
         callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
         return;
@@ -29,7 +29,7 @@ exports.action = function ( data , callback , config , SARAH ) {
                     'Content-Length': myLen,
                     'Connection'    : 'Keep-Alive',
                     'User-Agent'    : 'MEI-LAN-REMOTE-CALL',
-                    'Content-Type'  : 'application/x-www-form-urlencoded'
+                    'content-type'  : 'application/x-www-form-urlencoded'
                     },
         form    :   myForm
 
