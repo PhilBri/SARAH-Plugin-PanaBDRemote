@@ -7,11 +7,6 @@
         <item>
             Sarah 
             <one-of>
-
-                <item>Combien de plantes sont connectées
-                    <tag>out.action.mode="nbPlants";out.action.ttsAction=" plantes sont connectées";</tag>
-                </item>
-
                 <item>
 
                     <one-of>
