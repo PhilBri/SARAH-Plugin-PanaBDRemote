@@ -1,277 +1,95 @@
-<!----------------------------------------------------->
-<!--                PanaBDRemote v 0.9               -->
-<!--                                                 -->
-<!-- Authors : Phil Bri & Emmanuel Crespin (11/2014) -->
-<!--  (See http://encausse.wordpress.com/s-a-r-a-h/) -->
-<!-- Description :                                   -->
-<!--    Panasonic BluRay's Plugin for SARAH project  -->
-<!----------------------------------------------------->
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulepanabdremote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+    <rule id="rulepanabdremote" scope="public">
+        <example>Ouvre le tiroir du Blou Rai</example>
 
-<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulePanaBDRemote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
-    <rule id="rulePanaBDRemote" scope="public">
-        <example>Sarah allume le blou rai</example>
         <tag>out.action=new Object(); </tag>
 
         <item>
             Sarah 
             <one-of>
 
-<!--- Matériel §--->                
-
-                <item>
-                    Allume
-                    <tag>out.action.cmd="POWER";out.action.ttsAction="J'allume le blou rai";</tag>
+                <item>Combien de plantes sont connectées
+                    <tag>out.action.mode="nbPlants";out.action.ttsAction=" plantes sont connectées";</tag>
                 </item>
 
                 <item>
-                    Eteind
-                    <tag>out.action.cmd="POWER";out.action.ttsAction="J'éteind le blou rai";</tag>
+
+                    <one-of>
+                        <item>Ouvre</item>
+                        <item>Ferme</item>
+                        <item>Touche</item>
+                        <item>Appui sur la touche</item>
+                    </one-of>
+
+                    <one-of>
+                        <item>
+                            Allume
+                            <tag>out.action.cmd="POWER";out.action.ttsAction="J'allume le blou rai";</tag>
+                        </item>
+
+                        <item>
+                            Eteind
+                            <tag>out.action.cmd="POWER";out.action.ttsAction="J'éteind le blou rai";</tag>
+                        </item>
+
+                        <item>
+                            Le tiroir
+                            <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du blou rai";</tag>
+                        </item>
+ 
+                        <item>
+                            Stoppe
+                            <tag>out.action.cmd="STOP";out.action.ttsAction="Le blou rai est arrété";</tag>
+                        </item>
+
+                        <item>
+                            Lis
+                            <tag>out.action.cmd="PLAYBACK";out.action.ttsAction="Le blou rai est en lecture";</tag>
+                        </item>
+
+                        <item>
+                            Met en pause
+                            <tag>out.action.cmd="PAUSE";out.action.ttsAction="Le blou rai est en pause";</tag>
+                        </item>
+
+                        <item>1
+                            <tag>out.action.cmd="D1";out.action.ttsAction="Touche 1";</tag>
+                        </item>
+                    </one-of>
+
+                    <item repeat="0-1">
+
+                        <one-of>
+                            <item>du
+                                <tag>out.action.gender="du ";</tag>
+                            </item>
+
+                            <item>de la télécommande du
+                                <tag>out.action.gender="de la télécommande du";</tag>
+                            </item>
+
+                        </one-of>
+
+                        <one-of>
+                            <item>Blou rai
+                            </item>
+                        </one-of>
+                    </item>
                 </item>
-
-                <item>
-                    Ouvre
-                    <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du blou rai";</tag>
-                </item>
-
-                <item>
-                    Ferme
-                    <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du blou rai";</tag>
-                </item>
-
-<!--- Navigation §--->                
-
-                <item>
-                    Stoppe
-                    <tag>out.action.cmd="STOP";out.action.ttsAction="La lecture du blou rai est arrétée";</tag>
-                </item>
-
-                <item>
-                    Lis
-                    <tag>out.action.cmd="PLAYBACK";out.action.ttsAction="Le blou rai est en lecture";</tag>
-                </item>
-
-                <item>
-                    Met en pause
-                    <tag>out.action.cmd="PAUSE";out.action.ttsAction="Le blou rai est en pause";</tag>
-                </item>
-
-                <item>
-                    Piste suivante
-                    <tag>out.action.cmd="SKIPFWD";out.action.ttsAction="Piste suivante sélectionnée";</tag>
-                </item>
-
-                <item>
-                    Piste précédante
-                    <tag>out.action.cmd="SKIPPREV";out.action.ttsAction="Piste précedante sélectionnée";</tag>
-                </item>
-
-                <item>
-                    Avance
-                    <tag>out.action.cmd="CUE";out.action.ttsAction="Avance rapide";</tag>
-                </item>
-
-                <item>
-                    Recule
-                    <tag>out.action.cmd="REV";out.action.ttsAction="Retour rapide";</tag>
-                </item>
-
-<!--- Divers §--->
-
-                <item>
-                    Affiche en fenêtre
-                    <tag>out.action.cmd="P_IN_P";out.action.ttsAction="L'affichage est fenétré";</tag>
-                </item>
-
-                <item>
-                    Affiche le P I P
-                    <tag>out.action.cmd="P_IN_P";out.action.ttsAction="Affichage en P I P";</tag>
-                </item>
-
-                <item>
-                    Affiche skype
-                    <tag>out.action.cmd="SKYPE";out.action.ttsAction="Skype est affiché";</tag>
-                </item>
-
-                <item>
-                    Affiche en 3 D
-                    <tag>out.action.cmd="3D";out.action.ttsAction="Résolution changée";</tag>
-                </item>
-
-                <item>
-                    Affiche en 2 D
-                    <tag>out.action.cmd="3D";out.action.ttsAction="Résolution changée";</tag>
-                </item>
-
-                <item>
-                    Affiche Netflixe
-                    <tag>out.action.cmd="NETFLIX";out.action.ttsAction="Netflixe est affiché";</tag>
-                </item>
-
-                <item>
-                    Affiche le menu audio
-                    <tag>out.action.cmd="AUDIO";out.action.ttsAction="Menu audio affiché";</tag>
-                </item>
-
-                <item>
-                    Affiche le menu viera cast
-                    <tag>out.action.cmd="V_CAST";out.action.ttsAction="Menu viera cast affiché";</tag>
-                </item>
-
-<!--- Menus & infos §--->                
-
-                <item>
-                    Quel est l'état
-                    <tag>out.action.cmd="STATUS";out.action.ttsAction="L'état du blou rai est affiché";</tag>
-                </item>
-
-                <item>
-                    Affiche le menu principal
-                    <tag>out.action.cmd="TITLE";out.action.ttsAction="Menu principal affiché";</tag>
-                </item>
-
-                <item>
-                    Affiche le sous-menu
-                    <tag>out.action.cmd="MENU";out.action.ttsAction="Entrée dans le sous menu";</tag>
-                </item>
-
-                <item>
-                    Sort du menu
-                    <tag>out.action.cmd="EXIT";out.action.ttsAction="Sortie du menu";</tag>
-                </item>
-
-<!--- Numériques §--->                
-
-                <item>
-                    Touche 1
-                    <tag>out.action.cmd="D1";out.action.ttsAction="Touche 1";</tag>
-                </item>
-
-                <item>
-                    Touche 2
-                    <tag>out.action.cmd="D3";out.action.ttsAction="Touche 2";</tag>
-                </item>
-
-                <item>
-                    Touche 3
-                    <tag>out.action.cmd="D3";out.action.ttsAction="Touche 3";</tag>
-                </item>
-
-                <item>
-                    Touche 4
-                    <tag>out.action.cmd="D4";out.action.ttsAction="Touche 4";</tag>
-                </item>
-
-                <item>
-                    Touche 5
-                    <tag>out.action.cmd="D5";out.action.ttsAction="Touche 5";</tag>
-                </item>
-
-                <item>
-                    Touche 6
-                    <tag>out.action.cmd="D6";out.action.ttsAction="Touche 6";</tag>
-                </item>
-
-                <item>
-                    Touche 7
-                    <tag>out.action.cmd="D7";out.action.ttsAction="Touche 7";</tag>
-                </item>
-
-                <item>
-                    Touche 8
-                    <tag>out.action.cmd="D8";out.action.ttsAction="Touche 8";</tag>
-                </item>
-
-                <item>
-                    Touche 9
-                    <tag>out.action.cmd="D9";out.action.ttsAction="Touche 9";</tag>
-                </item>
-
-                <item>
-                    Touche 0
-                    <tag>out.action.cmd="D0";out.action.ttsAction="Touche 0";</tag>
-                </item>
-
-                <item>
-                    Touche étoile
-                    <tag>out.action.cmd="CLEAR";out.action.ttsAction="Touche étoile";</tag>
-                </item>
-
-                <item>
-                    Touche dièse
-                    <tag>out.action.cmd="SHARP";out.action.ttsAction="Touche dièse";</tag>
-                </item>
-
-<!--- Navigation §--->
-
-                <item>
-                    Touche homme
-                    <tag>out.action.cmd="MLTNAV";out.action.ttsAction="Touche homme";</tag>
-                </item>
-
-                <item>
-                    Touche haut
-                    <tag>out.action.cmd="UP";out.action.ttsAction="Touche haut";</tag>
-                </item>
-
-                <item>
-                    Touche bas
-                    <tag>out.action.cmd="DOWN";out.action.ttsAction="Touche bas";</tag>
-                </item>
-
-                <item>
-                    Touche gauche
-                    <tag>out.action.cmd="LEFT";out.action.ttsAction="Touche gauche";</tag>
-                </item>
-
-                <item>
-                    Touche droite
-                    <tag>out.action.cmd="RIGHT";out.action.ttsAction="Touche droite";</tag>
-                </item>
-
-<!--- Couleurs §--->
-
-                <item>
-                    Touche rouge
-                    <tag>out.action.cmd="RED";out.action.ttsAction="Touche rouge";</tag>
-                </item>
-
-                <item>
-                    Touche verte
-                    <tag>out.action.cmd="GREEN";out.action.ttsAction="Touche verte";</tag>
-                </item>
-
-                <item>
-                    Touche bleue
-                    <tag>out.action.cmd="BLUE";out.action.ttsAction="Touche bleue";</tag>
-                </item>
-
-                <item>
-                    Touche jaune
-                    <tag>out.action.cmd="YELLOW";out.action.ttsAction="Touche jaune";</tag>
-                </item>
-
-<!--- Fin de phrase §--->
 
             </one-of>
-
             <item repeat="0-1">
 
                 <one-of>
-
-                    <item>
-                        du blou rai
-                        <tag>out.action.gender="du ";</tag>
-                    </item>
-
-                    <item>
-                        le blou rai
-                        <tag>out.action.gender="le ";</tag>
-                    </item>
+                    <item>s'il te plait</item>
+                    <item>si il te plait</item>
+                    <item>merci</item>
                 </one-of>
+
             </item>
 
         </item>
 
-        <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/PanaBDRemote";</tag>
+        <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/panabdremote";</tag>
     </rule>
 </grammar>

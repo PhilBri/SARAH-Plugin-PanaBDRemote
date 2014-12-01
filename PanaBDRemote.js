@@ -9,7 +9,7 @@
 */
 
 exports.action = function ( data , callback , config , SARAH ) {
-    var cfg = config.module.PanaBDRemote;
+    var cfg = config.module.panabdremote;
     var cmd = data.cmd;
 
     if ( !cfg.BluRayIP ) {
@@ -24,7 +24,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 
     request.post ({
 
-        uri     :   'http://' + BluRayIP + '/WAN/dvdr/dvdr_ctrl.cgi', 
+        uri     :   'http://' + cfg.BluRayIP + '/WAN/dvdr/dvdr_ctrl.cgi', 
         headers :   { 
                     'Content-Length': myLen,
                     'Connection'    : 'Keep-Alive',
@@ -39,10 +39,10 @@ exports.action = function ( data , callback , config , SARAH ) {
 
             console.log ( "PanaBDRemote : Action échouée => "  + err );
             callback ({ 'tts' : "L'action à échouée !" });
-            return;
-        }
+        } else {
         
-        console.log ( 'PanaBDRemote : ' + cmd + ' => OK !\r\n' );
-        callback ({ 'tts' : data.ttsAction });
+            console.log ( 'PanaBDRemote : ' + cmd + ' => OK !\r\n' );
+            callback ({ 'tts' : data.ttsAction });
+        }
     });
 }
