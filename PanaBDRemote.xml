@@ -14,6 +14,7 @@
                         <item>Ouvre</item>
                         <item>Ferme</item>
                         <item>Touche</item>
+                        <item>Affiche</item>
                         <item>Met en</item>
                         <item>Appui sur la touche</item>
                     </one-of>
@@ -61,13 +62,137 @@
                             <tag>out.action.cmd="REV";out.action.ttsAction="Retour rapide";</tag>
                         </item>
 
+<!-- Menus & Infos -->
 
+                        <item>En fenêtre
+                            <tag>out.action.cmd="P_IN_P";out.action.ttsAction="L'affichage est fenétré";</tag>
+                        </item>
 
+                        <item>Le P I P
+                            <tag>out.action.cmd="P_IN_P";out.action.ttsAction="Affichage en P I P";</tag>
+                        </item>
 
+                        <item>Skype
+                            <tag>out.action.cmd="SKYPE";out.action.ttsAction="Skype est affiché";</tag>
+                        </item>
+
+                        <item>En 3 D
+                            <tag>out.action.cmd="3D";out.action.ttsAction="Résolution changée";</tag>
+                        </item>
+
+                        <item>En 2 D
+                            <tag>out.action.cmd="3D";out.action.ttsAction="Résolution changée";</tag>
+                        </item>
+
+                        <item>Netflix
+                            <tag>out.action.cmd="NETFLIX";out.action.ttsAction="Netflixe est affiché";</tag>
+                        </item>
+
+                        <item>Le menu audio
+                            <tag>out.action.cmd="AUDIO";out.action.ttsAction="Menu audio affiché";</tag>
+                        </item>
+
+                        <item>Le menu viera cast
+                            <tag>out.action.cmd="V_CAST";out.action.ttsAction="Menu viera cast affiché";</tag>
+                        </item>
+
+                        <item>Quel est l'état
+                            <tag>out.action.cmd="STATUS";out.action.ttsAction="L'état du blou rai est affiché";</tag>
+                        </item>
+
+                        <item>Le menu principal
+                            <tag>out.action.cmd="TITLE";out.action.ttsAction="Menu principal affiché";</tag>
+                        </item>
+
+                        <item>Le sous-menu
+                            <tag>out.action.cmd="MENU";out.action.ttsAction="Entrée dans le sous menu";</tag>
+                        </item>
+
+                        <item>Sort du menu
+                            <tag>out.action.cmd="EXIT";out.action.ttsAction="Sortie du menu";</tag>
+                        </item>
+<!-- Numériques -->
+
+                        <item>0
+                            <tag>out.action.cmd="D0";out.action.ttsAction="Touche 0";</tag>
+                        </item>
                         <item>1
                             <tag>out.action.cmd="D1";out.action.ttsAction="Touche 1";</tag>
                         </item>
+                        <item>2
+                            <tag>out.action.cmd="D2";out.action.ttsAction="Touche 2";</tag>
+                        </item>
+                        <item>3
+                            <tag>out.action.cmd="D3";out.action.ttsAction="Touche 3";</tag>
+                        </item>
+                        <item>4
+                            <tag>out.action.cmd="D4";out.action.ttsAction="Touche 4";</tag>
+                        </item>
+                        <item>5
+                            <tag>out.action.cmd="D5";out.action.ttsAction="Touche 5";</tag>
+                        </item>
+                        <item>6
+                            <tag>out.action.cmd="D6";out.action.ttsAction="Touche 6";</tag>
+                        </item>
+                        <item>7
+                            <tag>out.action.cmd="D7";out.action.ttsAction="Touche 7";</tag>
+                        </item>
+                        <item>8
+                            <tag>out.action.cmd="D8";out.action.ttsAction="Touche 8";</tag>
+                        </item>
+                        <item>9
+                            <tag>out.action.cmd="D9";out.action.ttsAction="Touche 9";</tag>
+                        </item>
+                        <item>Etoile
+                            <tag>out.action.cmd="CLEAR";out.action.ttsAction="Touche étoile";</tag>
+                        </item>
+                        <item>Dièse
+                            <tag>out.action.cmd="SHARP";out.action.ttsAction="Touche dièse";</tag>
+                        </item>
+
+<!-- Navigation -->
+
+                        <item>Home
+                            <tag>out.action.cmd="MLTNAV";out.action.ttsAction="Touche home";</tag>
+                        </item>
+
+                        <item>Haut
+                            <tag>out.action.cmd="UP";out.action.ttsAction="Touche haut";</tag>
+                        </item>
+
+                        <item>Bas
+                            <tag>out.action.cmd="DOWN";out.action.ttsAction="Touche bas";</tag>
+                        </item>
+
+                        <item>Gauche
+                            <tag>out.action.cmd="LEFT";out.action.ttsAction="Touche gauche";</tag>
+                        </item>
+
+                        <item>Droite
+                            <tag>out.action.cmd="RIGHT";out.action.ttsAction="Touche droite";</tag>
+                        </item>
+
+<!-- Couleurs -->
+
+                        <item>Rouge
+                            <tag>out.action.cmd="RED";out.action.ttsAction="Touche rouge";</tag>
+                        </item>
+
+                        <item>Verte
+                            <tag>out.action.cmd="GREEN";out.action.ttsAction="Touche verte";</tag>
+                        </item>
+
+                        <item>Bleue
+                            <tag>out.action.cmd="BLUE";out.action.ttsAction="Touche bleue";</tag>
+                        </item>
+
+                        <item>Jaune
+                            <tag>out.action.cmd="YELLOW";out.action.ttsAction="Touche jaune";</tag>
+                        </item>
+
                     </one-of>
+
+<!-- Fin de Phrase -->
 
                     <item repeat="0-1">
 
@@ -80,20 +205,26 @@
                                 <tag>out.action.gender="le ";</tag>
                             </item>
 
+                            <item>sur le
+                                <tag>out.action.gender="sur le ";</tag>
+                            </item>
+
                             <item>de la télécommande du
                                 <tag>out.action.gender="de la télécommande du";</tag>
                             </item>
-
                         </one-of>
 
                         <one-of>
                             <item>Blou rai
                             </item>
                         </one-of>
+
                     </item>
                 </item>
-
             </one-of>
+
+<!-- Politesse (facultatif) -->
+
             <item repeat="0-1">
 
                 <one-of>
