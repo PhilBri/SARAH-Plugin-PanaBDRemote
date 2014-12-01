@@ -9,7 +9,8 @@
 */
 
 exports.action = function ( data , callback , config , SARAH ) {
-    var cfg = config.module.panabdremote;
+    var cfg = config.modules.panabdremote;
+    console.log(cfg);
     var cmd = data.cmd;
 
     if ( !cfg.BluRayIP ) {
@@ -17,6 +18,8 @@ exports.action = function ( data , callback , config , SARAH ) {
         callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
         return;
     }
+
+    var brIP = cfg.BluRayIP;
    
     var myForm  = require ( 'querystring' ).parse ( 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100' );
     var myLen   = require ( 'querystring' ).stringify ( myForm ).length;
@@ -24,7 +27,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 
     request.post ({
 
-        uri     :   'http://' + cfg.BluRayIP + '/WAN/dvdr/dvdr_ctrl.cgi', 
+        uri     :   'http://' + brIP + '/WAN/dvdr/dvdr_ctrl.cgi', 
         headers :   { 
                     'Content-Length': myLen,
                     'Connection'    : 'Keep-Alive',
@@ -37,11 +40,11 @@ exports.action = function ( data , callback , config , SARAH ) {
         
         if ( err || httpResponse.statusCode != 200 ) {
 
-            console.log ( "PanaBDRemote : Action échouée => "  + err );
+            console.log ( 'PanaBDRemote => Action : "' + cmd + '" échouée => '  + err );
             callback ({ 'tts' : "L'action à échouée !" });
         } else {
         
-            console.log ( 'PanaBDRemote : ' + cmd + ' => OK !\r\n' );
+            console.log ( 'PanaBDRemote => ' + cmd + ' => OK !\r\n' );
             callback ({ 'tts' : data.ttsAction });
         }
     });

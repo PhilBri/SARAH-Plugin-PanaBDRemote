@@ -7,45 +7,62 @@
         <item>
             Sarah 
             <one-of>
+
                 <item>
 
                     <one-of>
                         <item>Ouvre</item>
                         <item>Ferme</item>
                         <item>Touche</item>
+                        <item>Met en</item>
                         <item>Appui sur la touche</item>
                     </one-of>
 
                     <one-of>
-                        <item>
-                            Allume
+                        <item>Allume
                             <tag>out.action.cmd="POWER";out.action.ttsAction="J'allume le blou rai";</tag>
                         </item>
 
-                        <item>
-                            Eteind
+                        <item>éteind
                             <tag>out.action.cmd="POWER";out.action.ttsAction="J'éteind le blou rai";</tag>
                         </item>
 
-                        <item>
-                            Le tiroir
+                        <item>Le tiroir
                             <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du blou rai";</tag>
                         </item>
  
-                        <item>
-                            Stoppe
+<!-- Lecture -->
+
+                        <item>Stoppe
                             <tag>out.action.cmd="STOP";out.action.ttsAction="Le blou rai est arrété";</tag>
                         </item>
 
-                        <item>
-                            Lis
+                        <item>Lis
                             <tag>out.action.cmd="PLAYBACK";out.action.ttsAction="Le blou rai est en lecture";</tag>
                         </item>
 
-                        <item>
-                            Met en pause
+                        <item>En pause
                             <tag>out.action.cmd="PAUSE";out.action.ttsAction="Le blou rai est en pause";</tag>
                         </item>
+
+                        <item>Piste suivante
+                            <tag>out.action.cmd="SKIPFWD";out.action.ttsAction="Piste suivante sélectionnée";</tag>
+                        </item>
+
+                        <item>Piste précédante
+                            <tag>out.action.cmd="SKIPPREV";out.action.ttsAction="Piste précedante sélectionnée";</tag>
+                        </item>
+
+                        <item>Avance
+                            <tag>out.action.cmd="CUE";out.action.ttsAction="Avance rapide";</tag>
+                        </item>
+
+                        <item>Recule
+                            <tag>out.action.cmd="REV";out.action.ttsAction="Retour rapide";</tag>
+                        </item>
+
+
+
 
                         <item>1
                             <tag>out.action.cmd="D1";out.action.ttsAction="Touche 1";</tag>
@@ -57,6 +74,10 @@
                         <one-of>
                             <item>du
                                 <tag>out.action.gender="du ";</tag>
+                            </item>
+
+                            <item>le
+                                <tag>out.action.gender="le ";</tag>
                             </item>
 
                             <item>de la télécommande du
