@@ -49,7 +49,7 @@ exports.action = function ( data , callback , config , SARAH ) {
             callback ({ 'tts' : "L'action à échouée !" });
         } else {
         
-            console.log ( '\r\nPanaBDRemote => "' + cmd + '"" => OK !\r\n' );
+            console.log ( '\r\nPanaBDRemote => "' + cmd + '" => OK !\r\n' );
             callback ({ 'tts' : data.ttsAction });
         }
     });
