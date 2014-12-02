@@ -7,27 +7,33 @@
 |    Panasonic BluRay's Plugin for SARAH project    |
 |___________________________________________________|
 */
+var BluRayIP;
+
+exports.init = function ( SARAH ) {
+
+    var findBR = require ( './lib/findBR.js' );
+
+    findBR( 'Panasonic', 'Disc', function ( brIP ) {
+        if ( !brIP ) { return console.log ( '\r\nPanaBDRemote => BluRay non trouvée\r\n' ) }
+        BluRayIP = brIP;
+        console.log ( '\r\nPanaBDRemote => BluRay IP = ' + BluRayIP + ' (Auto Detection)\r\n');
+    });
+}
+
 
 exports.action = function ( data , callback , config , SARAH ) {
-    var cfg = config.modules.panabdremote;
-    console.log(cfg);
-    var cmd = data.cmd;
 
-    if ( !cfg.BluRayIP ) {
-        console.log ( 'PanaBDRemote => Pas d\'adresse IP configurée dans PanaBDRemote.prop !' );
-        callback ({ 'tts': 'Adresse I P incorrecte ou absente !' });
-        return;
-    }
+    cmd = data.cmd;
 
-    var brIP = cfg.BluRayIP;
+    if ( !BluRayIP ) { return callback ({ 'tts' : 'Blou Ré non trouvée' }) }
    
-    var myForm  = require ( 'querystring' ).parse ( 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100' );
-    var myLen   = require ( 'querystring' ).stringify ( myForm ).length;
-    var request = require ( 'request' );
+    var myForm  = require ( 'querystring' ).parse ( 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100' ),
+        myLen   = require ( 'querystring' ).stringify ( myForm ).length,
+        request = require ( 'request' );
 
     request.post ({
 
-        uri     :   'http://' + brIP + '/WAN/dvdr/dvdr_ctrl.cgi', 
+        uri     :   'http://' + BluRayIP + '/WAN/dvdr/dvdr_ctrl.cgi', 
         headers :   { 
                     'Content-Length': myLen,
                     'Connection'    : 'Keep-Alive',
@@ -40,11 +46,10 @@ exports.action = function ( data , callback , config , SARAH ) {
         
         if ( err || httpResponse.statusCode != 200 ) {
 
-            console.log ( 'PanaBDRemote => Action : "' + cmd + '" échouée => '  + err );
             callback ({ 'tts' : "L'action à échouée !" });
         } else {
         
-            console.log ( 'PanaBDRemote => ' + cmd + ' => OK !\r\n' );
+            console.log ( '\r\nPanaBDRemote => "' + cmd + '"" => OK !\r\n' );
             callback ({ 'tts' : data.ttsAction });
         }
     });
