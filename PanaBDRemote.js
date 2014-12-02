@@ -14,18 +14,17 @@ exports.init = function ( SARAH ) {
     var findBR = require ( './lib/findBR.js' );
 
     findBR( 'Panasonic', 'Disc', function ( brIP ) {
-        if ( !brIP ) { return console.log ( '\r\nPanaBDRemote => BluRay non trouvée\r\n' ) }
+        if ( !brIP ) { return console.log ( '\r\nPanaBDRemote => BluRay non trouvé (Auto Détection)\r\n' ) }
         BluRayIP = brIP;
-        console.log ( '\r\nPanaBDRemote => BluRay IP = ' + BluRayIP + ' (Auto Detection)\r\n');
+        console.log ( '\r\nPanaBDRemote => BluRay IP = ' + BluRayIP + ' (Auto Détection)\r\n');
     });
 }
-
 
 exports.action = function ( data , callback , config , SARAH ) {
 
     cmd = data.cmd;
 
-    if ( !BluRayIP ) { return callback ({ 'tts' : 'Blou Ré non trouvée' }) }
+    if ( !BluRayIP ) { return callback ({ 'tts' : 'Blou Ré non trouvé' }) }
    
     var myForm  = require ( 'querystring' ).parse ( 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100' ),
         myLen   = require ( 'querystring' ).stringify ( myForm ).length,
