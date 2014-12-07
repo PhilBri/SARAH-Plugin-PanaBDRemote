@@ -25,7 +25,7 @@ exports.init = function ( SARAH ) {
             if ( data.from != 'PanaBDRemote' ) fsearch();
             else
             {
-                if ( BluRayIP ) console.log ( '\r\nPanaBDRemote => BluRay IP = ' + BluRayIP + ' (Auto Detect Plugin)');
+                if ( BluRayIP ) console.log ( '\r\nPanaBDRemote => BluRay : ip = ' + BluRayIP + ' (Auto Detect Plugin)');
                 else console.log ( '\r\nPanaBDRemote => BluRay non trouvé (Auto Detect Plugin)' );
                 SARAH.context.flag = false;
             }
