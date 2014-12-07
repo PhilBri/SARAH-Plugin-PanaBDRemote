@@ -23,10 +23,9 @@ exports.init = function ( SARAH ) {
 
         SARAH.listen ( 'autodetect', function ( data ) {
             if ( data.from != 'PanaBDRemote' ) fsearch();
-            else
-            {
+            else {
                 if ( BluRayIP ) console.log ( '\r\nPanaBDRemote => BluRay : ip = ' + BluRayIP + ' (Auto Detect Plugin)');
-                else console.log ( '\r\nPanaBDRemote => BluRay non trouvé (Auto Detect Plugin)' );
+                else console.log ( '\r\nPanaBDRemote => BluRay : Non trouvé (Auto Detect Plugin)' );
                 SARAH.context.flag = false;
             }
         });
@@ -35,6 +34,7 @@ exports.init = function ( SARAH ) {
     function fsearch () {
         if ( SARAH.context.flag != true ) {
             SARAH.context.flag = true;
+
             findBR = require ( './lib/findBR.js' ) ( 'Panasonic', 'Disc', function ( RetIP ) {
                 SARAH.context.panabdremote = {'ip' : RetIP };
                 BluRayIP = SARAH.context.panabdremote.ip;
