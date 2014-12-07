@@ -1,30 +1,55 @@
 /*__________________________________________________
-|              PanaBDRemote v0.9                    |
+|              PanaBDRemote v2.1                    |
 |                                                   |
-| Authors : Phil Bri & Emmanuel Crespin ( 10/2014 ) |
+| Authors : Phil Bri & Emmanuel Crespin ( 12/2014 ) |
 |    (See http://encausse.wordpress.com/s-a-r-a-h/) |
 | Description :                                     |
 |    Panasonic BluRay's Plugin for SARAH project    |
 |___________________________________________________|
 */
+
 var BluRayIP;
 
 exports.init = function ( SARAH ) {
+    var config = SARAH.ConfigManager.getConfig();
 
-    var findBR = require ( './lib/findBR.js' );
+    if ( /^autodetect$/i.test( config.modules.panabdremote.BluRay_IP ) == false ) {
+        return BluRayIP = config.modules.panabdremote.BluRay_IP;
+    }
 
-    findBR( 'Panasonic', 'Disc', function ( brIP ) {
-        if ( !brIP ) { return console.log ( '\r\nPanaBDRemote => BluRay non trouvé (Auto Détection)\r\n' ) }
-        BluRayIP = brIP;
-        console.log ( '\r\nPanaBDRemote => BluRay IP = ' + BluRayIP + ' (Auto Détection)\r\n');
-    });
+    // Configure ip autodetection : (Auto Detect Plugin)
+    if ( !SARAH.context.panabdremote ) {
+        fsearch();
+
+        SARAH.listen ( 'autodetect', function ( data ) {
+            if ( data.from != 'PanaBDRemote' ) fsearch();
+            else
+            {
+                if ( BluRayIP ) console.log ( '\r\nPanaBDRemote => BluRay IP = ' + BluRayIP + ' (Auto Detect Plugin)');
+                else console.log ( '\r\nPanaBDRemote => BluRay non trouvé (Auto Detect Plugin)' );
+                SARAH.context.flag = false;
+            }
+        });
+    }
+
+    function fsearch () {
+        if ( SARAH.context.flag != true ) {
+            SARAH.context.flag = true;
+            findBR = require ( './lib/findBR.js' ) ( 'Panasonic', 'Disc', function ( RetIP ) {
+                SARAH.context.panabdremote = {'ip' : RetIP };
+                BluRayIP = SARAH.context.panabdremote.ip;
+                SARAH.trigger ( 'autodetect', { 'from' : 'PanaBDRemote' });
+            });
+        }
+    }
 }
 
 exports.action = function ( data , callback , config , SARAH ) {
-
-    cmd = data.cmd;
-
-    if ( !BluRayIP ) { return callback ({ 'tts' : 'Blou Ré non trouvé' }) }
+    var cmd = data.cmd,
+        myReg = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/;
+    
+    if ( ! myReg.test( BluRayIP ) && ! myReg.test( config.modules.panabdremote.BluRay_IP )) { 
+        return callback ({ 'tts' : 'Blue Ray, non trouvé' }) }
    
     var myForm  = require ( 'querystring' ).parse ( 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100' ),
         myLen   = require ( 'querystring' ).stringify ( myForm ).length,
@@ -48,7 +73,7 @@ exports.action = function ( data , callback , config , SARAH ) {
             callback ({ 'tts' : "L'action à échouée !" });
         } else {
         
-            console.log ( '\r\nPanaBDRemote => "' + cmd + '" => OK !\r\n' );
+            console.log ( '\r\nPanaBDRemote => Commande : "' + cmd + '" => OK !\r\n' );
             callback ({ 'tts' : data.ttsAction });
         }
     });
