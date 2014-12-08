@@ -48,8 +48,10 @@ exports.action = function ( data , callback , config , SARAH ) {
     var cmd = data.cmd,
         myReg = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/;
     
-    if ( ! myReg.test( BluRayIP ) && ! myReg.test( config.modules.panabdremote.BluRay_IP )) { 
+    if ( ! myReg.test( SARAH.context.panabdremote.ip ) && ! myReg.test( config.modules.panabdremote.BluRay_IP )) { 
         return callback ({ 'tts' : 'Blue Ray, non trouvé' }) }
+
+    BluRayIP = SARAH.context.panabdremote.ip;
    
     var myForm  = require ( 'querystring' ).parse ( 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100' ),
         myLen   = require ( 'querystring' ).stringify ( myForm ).length,
