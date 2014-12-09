@@ -36,7 +36,7 @@ exports.init = function ( SARAH ) {
             SARAH.context.flag = true;
 
             findBR = require ( './lib/findBR.js' ) ( 'Panasonic', 'Disc', function ( RetIP ) {
-                SARAH.context.panabdremote = { 'ip' : RetIP };
+                SARAH.context.panabdremote = {'ip' : RetIP };
                 BluRayIP = SARAH.context.panabdremote.ip;
                 SARAH.trigger ( 'autodetect', { 'from' : 'PanaBDRemote' });
             });
@@ -52,6 +52,9 @@ exports.action = function ( data , callback , config , SARAH ) {
         if ( myReg.test( config.modules.panabdremote.BluRay_IP ) BluRayIP = config.modules.panabdremote.BluRay_IP
             if ( !BluRayIP ) return callback ({ 'tts' : 'Blue Ray, non trouvé' }) }
 
+
+    BluRayIP = SARAH.context.panabdremote.ip;
+   
     var myForm  = require ( 'querystring' ).parse ( 'cCMD_RC_' + cmd + '.x=100&cCMD_RC_' + cmd + '.y=100' ),
         myLen   = require ( 'querystring' ).stringify ( myForm ).length,
         request = require ( 'request' );

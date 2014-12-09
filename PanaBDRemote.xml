@@ -1,5 +1,5 @@
 <grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulepanabdremote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
-    <rule id="rulePanaBDRemote" scope="public">
+    <rule id="rulepanabdremote" scope="public">
         <example>Ouvre le tiroir du Blou Rai</example>
 
         <tag>out.action=new Object(); </tag>
