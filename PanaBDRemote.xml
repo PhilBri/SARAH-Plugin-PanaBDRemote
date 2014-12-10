@@ -1,5 +1,5 @@
-<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulepanabdremote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
-    <rule id="rulepanabdremote" scope="public">
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulePanaBDRemote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+    <rule id="rulePanaBDRemote" scope="public">
         <example>Ouvre le tiroir du Blou Rai</example>
 
         <tag>out.action=new Object(); </tag>
@@ -7,9 +7,8 @@
         <item>
             Sarah 
             <one-of>
-
                 <item>
-
+<!-- Ordres non obligatoires -->
                     <one-of>
                         <item>Ouvre</item>
                         <item>Ferme</item>
@@ -17,102 +16,78 @@
                         <item>Affiche</item>
                         <item>Met en</item>
                         <item>Appui sur la touche</item>
+                       <item> <ruleref special="NULL"/> </item>
                     </one-of>
-
+<!-- Lecture & on/off & ouverture -->
                     <one-of>
                         <item>Allume
-                            <tag>out.action.cmd="POWER";out.action.ttsAction="J'allume le blou rai";</tag>
+                            <tag>out.action.cmd="POWER";out.action.ttsAction="J'allume le Blue Ray";</tag>
                         </item>
-
-                        <item>éteind
-                            <tag>out.action.cmd="POWER";out.action.ttsAction="J'éteind le blou rai";</tag>
+                        <item>Eteind
+                            <tag>out.action.cmd="POWER";out.action.ttsAction="J'éteind le Blue Ray";</tag>
                         </item>
-
                         <item>Le tiroir
-                            <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du blou rai";</tag>
+                            <tag>out.action.cmd="OP_CL";out.action.ttsAction="J'actionne le tiroir du Blue Ray";</tag>
                         </item>
- 
-<!-- Lecture -->
-
                         <item>Stoppe
-                            <tag>out.action.cmd="STOP";out.action.ttsAction="Le blou rai est arrété";</tag>
+                            <tag>out.action.cmd="STOP";out.action.ttsAction="Le Blue Ray est arrété";</tag>
                         </item>
-
-                        <item>Lis
-                            <tag>out.action.cmd="PLAYBACK";out.action.ttsAction="Le blou rai est en lecture";</tag>
+                        <item>Lecture
+                            <tag>out.action.cmd="PLAYBACK";out.action.ttsAction="Le Blue Ray est en lecture";</tag>
                         </item>
-
                         <item>En pause
-                            <tag>out.action.cmd="PAUSE";out.action.ttsAction="Le blou rai est en pause";</tag>
+                            <tag>out.action.cmd="PAUSE";out.action.ttsAction="Le Blue Ray est en pause";</tag>
                         </item>
-
                         <item>Piste suivante
                             <tag>out.action.cmd="SKIPFWD";out.action.ttsAction="Piste suivante sélectionnée";</tag>
                         </item>
-
                         <item>Piste précédante
                             <tag>out.action.cmd="SKIPPREV";out.action.ttsAction="Piste précedante sélectionnée";</tag>
                         </item>
-
                         <item>Avance
                             <tag>out.action.cmd="CUE";out.action.ttsAction="Avance rapide";</tag>
                         </item>
-
                         <item>Recule
                             <tag>out.action.cmd="REV";out.action.ttsAction="Retour rapide";</tag>
                         </item>
-
 <!-- Menus & Infos -->
-
                         <item>En fenêtre
                             <tag>out.action.cmd="P_IN_P";out.action.ttsAction="L'affichage est fenétré";</tag>
                         </item>
-
                         <item>Le P I P
                             <tag>out.action.cmd="P_IN_P";out.action.ttsAction="Affichage en P I P";</tag>
                         </item>
-
                         <item>Skype
                             <tag>out.action.cmd="SKYPE";out.action.ttsAction="Skype est affiché";</tag>
                         </item>
-
                         <item>En 3 D
                             <tag>out.action.cmd="3D";out.action.ttsAction="Résolution changée";</tag>
                         </item>
-
                         <item>En 2 D
                             <tag>out.action.cmd="3D";out.action.ttsAction="Résolution changée";</tag>
                         </item>
-
                         <item>Netflix
                             <tag>out.action.cmd="NETFLIX";out.action.ttsAction="Netflixe est affiché";</tag>
                         </item>
-
                         <item>Le menu audio
                             <tag>out.action.cmd="AUDIO";out.action.ttsAction="Menu audio affiché";</tag>
                         </item>
-
                         <item>Le menu viera cast
                             <tag>out.action.cmd="V_CAST";out.action.ttsAction="Menu viera cast affiché";</tag>
                         </item>
-
                         <item>Quel est l'état
-                            <tag>out.action.cmd="STATUS";out.action.ttsAction="L'état du blou rai est affiché";</tag>
+                            <tag>out.action.cmd="STATUS";out.action.ttsAction="L'état du Blue Ray est affiché";</tag>
                         </item>
-
                         <item>Le menu principal
                             <tag>out.action.cmd="TITLE";out.action.ttsAction="Menu principal affiché";</tag>
                         </item>
-
                         <item>Le sous-menu
                             <tag>out.action.cmd="MENU";out.action.ttsAction="Entrée dans le sous menu";</tag>
                         </item>
-
                         <item>Sort du menu
                             <tag>out.action.cmd="EXIT";out.action.ttsAction="Sortie du menu";</tag>
                         </item>
 <!-- Numériques -->
-
                         <item>0
                             <tag>out.action.cmd="D0";out.action.ttsAction="Touche 0";</tag>
                         </item>
@@ -149,9 +124,7 @@
                         <item>Dièse
                             <tag>out.action.cmd="SHARP";out.action.ttsAction="Touche dièse";</tag>
                         </item>
-
 <!-- Navigation -->
-
                         <item>Home
                             <tag>out.action.cmd="MLTNAV";out.action.ttsAction="Touche home";</tag>
                         </item>
@@ -171,9 +144,7 @@
                         <item>Droite
                             <tag>out.action.cmd="RIGHT";out.action.ttsAction="Touche droite";</tag>
                         </item>
-
 <!-- Couleurs -->
-
                         <item>Rouge
                             <tag>out.action.cmd="RED";out.action.ttsAction="Touche rouge";</tag>
                         </item>
@@ -191,52 +162,38 @@
                         </item>
 
                     </one-of>
-
 <!-- Fin de Phrase -->
-
                     <item repeat="0-1">
-
                         <one-of>
                             <item>du
                                 <tag>out.action.gender="du ";</tag>
                             </item>
-
                             <item>le
                                 <tag>out.action.gender="le ";</tag>
                             </item>
-
                             <item>sur le
                                 <tag>out.action.gender="sur le ";</tag>
                             </item>
-
                             <item>de la télécommande du
                                 <tag>out.action.gender="de la télécommande du";</tag>
                             </item>
                         </one-of>
-
                         <one-of>
-                            <item>Blou rai
+                            <item>Blue ray
                             </item>
                         </one-of>
-
                     </item>
                 </item>
             </one-of>
-
 <!-- Politesse (facultatif) -->
-
             <item repeat="0-1">
-
                 <one-of>
-                    <item>s'il te plait</item>
-                    <item>si il te plait</item>
-                    <item>merci</item>
+                    <item>S'il te plait</item>
+                    <item>Si il te plait</item>
+                    <item>Merci</item>
                 </one-of>
-
             </item>
-
         </item>
-
-        <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/panabdremote";</tag>
+        <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/PanaBDRemote";</tag>
     </rule>
 </grammar>

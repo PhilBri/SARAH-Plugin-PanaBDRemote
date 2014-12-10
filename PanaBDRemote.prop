@@ -1,6 +1,6 @@
 {
 	"modules" : { 
-		"panabdremote"  : {
+		"PanaBDRemote"  : {
 			"description": "SARAH controle les Blu-Ray's PANASONIC",
 			"version" : "2.1",
 			"BluRay_IP": "autodetect"
