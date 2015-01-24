@@ -7,11 +7,11 @@
 |    Panasonic BluRay's Plugin for SARAH project    |
 |___________________________________________________|
 */
-
+// Autodetect section
 exports.init = function ( SARAH ) {
     var config = SARAH.ConfigManager.getConfig();
 
-    if ( /^autodetect$/i.test( config.modules.PanaBDRemote.BluRay_IP ) == false ) return console.log ( 'VieraRemote => Autodetect [OFF]' );
+    if ( /^autodetect$/i.test( config.modules.PanaBDRemote.BluRay_IP ) == false ) return console.log ( 'PanaBDRemote => Autodetect [OFF]' );
 
     // Configure ip autodetection : (Auto Detect Plugin)
     if ( !SARAH.context.panabdremote ) {
@@ -21,8 +21,8 @@ exports.init = function ( SARAH ) {
             if ( data.from != 'PanaBDRemote' ) fsearch();
             else {
 
-                if ( SARAH.context.panabdremote.ip ) console.log ( '\r\nPanaBDRemote => Autodetect [ON] : ip = ' + SARAH.context.panabdremote.ip );
-                else console.log ( '\r\nPanaBDRemote => Autodetect [ON] : ip non trouvée !' );
+                if ( SARAH.context.panabdremote.ip ) console.log ( '\nPanaBDRemote => Autodetect [ON] : ip = ' + SARAH.context.panabdremote.ip );
+                else console.log ( '\nPanaBDRemote => Autodetect [ON] : ip non trouvée !' );
                 SARAH.context.flag = false;
             }
         });
@@ -39,7 +39,7 @@ exports.init = function ( SARAH ) {
         }
     }
 }
-
+// Main section
 exports.action = function ( data , callback , config , SARAH ) {
     var myReg = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/,
         BluRayIP;
@@ -71,7 +71,7 @@ exports.action = function ( data , callback , config , SARAH ) {
             callback ({ 'tts' : "L'action à échouée !" });
         } else {
         
-            console.log ( '\r\nPanaBDRemote => Commande [OK] : "' + data.cmd + '"' );
+            console.log ( '\nPanaBDRemote => Commande [OK] : "' + data.cmd + '"' );
             callback ({ 'tts' : data.ttsAction });
         }
     });
