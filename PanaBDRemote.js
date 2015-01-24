@@ -1,5 +1,5 @@
 /*__________________________________________________
-|              PanaBDRemote v2.1                    |
+|              PanaBDRemote v2.3                    |
 |                                                   |
 | Authors : Phil Bri & Emmanuel Crespin ( 12/2014 ) |
 |    (See http://encausse.wordpress.com/s-a-r-a-h/) |
